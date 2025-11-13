@@ -3,8 +3,6 @@ import { Document } from 'mongoose';
 
 @Schema({collection: 'RobotLog'})
 export class RobotLog {
-  @Prop({ required: true })
-  _id: string;
 
   @Prop({ required: true })
   robotId: string;

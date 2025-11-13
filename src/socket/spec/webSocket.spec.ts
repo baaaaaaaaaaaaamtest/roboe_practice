@@ -1,12 +1,14 @@
 import { io, Socket } from 'socket.io-client';
-import { CreateRobotLogDto } from '../dto/createRobotLog.dto';
+import { SocketMessagesDto } from '../dto/socketMessages.dto';
 
 
-const testRobotLogDto: CreateRobotLogDto = {
-  robotId: 'robot-001',
-  eventType: 'status_change',  // 'status_change', 'error', 'task_complete' 중 하나
-  message: 'Hello from Jest test!',
-  // timestamp는 optional이므로 생략 가능
+const testRobotLogDto: SocketMessagesDto = {
+    robotId: 'robot-123',
+    status: 'working',
+    battery: 85,
+    position: { x: 10, y: 20, z: 30 },
+    eventType: 'status_change',
+    message: '로봇 작동 중',
 };
 
 describe('ChatGateway WebSocket 테스트', () => {
@@ -36,6 +38,11 @@ describe('ChatGateway WebSocket 테스트', () => {
           robotId: testRobotLogDto.robotId,
           eventType: testRobotLogDto.eventType,  // 'status_change', 'error', 'task_complete' 중 하나
           message: testRobotLogDto.message,
+          battery: testRobotLogDto.battery,
+          position: testRobotLogDto.position,
+          status: testRobotLogDto.status,
+
+
         });
         done();
       } catch (err) {
