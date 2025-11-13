@@ -8,6 +8,7 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useWebSocketAdapter(new IoAdapter(app)); // socket.io 어댑터 사용 설정
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true, // DTO에 없는 프로퍼티는 자동으로 제거

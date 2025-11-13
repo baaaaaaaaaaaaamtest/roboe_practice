@@ -2,7 +2,6 @@ import {
   IsString,
   IsNumber,
   IsObject,
-  IsOptional,
   IsIn,
   IsDate,
   Min,
@@ -32,6 +31,7 @@ export class CreateRobotDto {
   @IsNumber()
   @Max(100)
   @Min(0)
+  @Type(() => Number) // 문자열로 넘어와도 숫자로 변환해줌
   readonly battery: number;
 
   @ApiProperty({ example: { x: 10, y: 20, z: 5 }, description: '로봇 위치 좌표' })
