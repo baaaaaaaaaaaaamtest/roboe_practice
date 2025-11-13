@@ -1,8 +1,15 @@
 import { Module } from '@nestjs/common';
-import { RobotsModule } from './robot/robot.module';
+import {RobotModule} from "./robot/robot.module";
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+
 
 @Module({
-  imports: [RobotsModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    // @ts-ignore
+    MongooseModule.forRoot(process.env.MONGODB_URI),
+    RobotModule],
   controllers: [],
   providers: [],
 })

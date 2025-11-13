@@ -1,4 +1,5 @@
 import { IsString, IsNumber, IsObject, IsOptional, IsIn, IsDate } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreateRobotDto {
   @IsString()
@@ -20,5 +21,6 @@ export class CreateRobotDto {
   readonly position: { x: number; y: number; z: number };
 
   @IsDate()
+  @Type(() => Date)
   lastConnected?: Date;
 }
