@@ -41,8 +41,6 @@ describe('ChatGateway WebSocket 테스트', () => {
           battery: testRobotLogDto.battery,
           position: testRobotLogDto.position,
           status: testRobotLogDto.status,
-
-
         });
         done();
       } catch (err) {
