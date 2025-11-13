@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-@Schema()
+@Schema({collection: 'RobotLog'})
 export class RobotLog {
   @Prop({ required: true })
   _id: string;
@@ -21,5 +21,6 @@ export class RobotLog {
   @Prop({ type: Date, default: Date.now })
   timestamp: Date;
 }
+export type RobotLogDocument = RobotLog & Document;
 
 export const RobotLogSchema = SchemaFactory.createForClass(RobotLog);

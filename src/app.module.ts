@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import {RobotModule} from "./robot/robot.module";
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { WebSocketModule } from './socket/webSocket.module';
 
 
 @Module({
@@ -9,7 +10,8 @@ import { MongooseModule } from '@nestjs/mongoose';
     ConfigModule.forRoot({ isGlobal: true }),
     // @ts-ignore
     MongooseModule.forRoot(process.env.MONGODB_URI),
-    RobotModule],
+    RobotModule,
+    WebSocketModule],
   controllers: [],
   providers: [],
 })
