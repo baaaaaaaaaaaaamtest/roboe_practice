@@ -1,9 +1,12 @@
 # Roboe Practice
 NestJS 기반 로봇 관리 REST API 프로젝트
-## 설명
 
+## 설명
 로봇의 상태를 등록, 조회, 수정, 삭제하고,
 WebSocket을 통해 로봇의 실시간 상태를 수집·전달하는 간단한 로봇 상태 모니터링 시스템을 구현
+<img width="860" height="600" alt="image" src="https://github.com/user-attachments/assets/68b0450a-597f-495a-9784-38f36d10b9db" />
+
+
 ---
 
 ## 설치 및 실행
