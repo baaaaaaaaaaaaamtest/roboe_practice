@@ -7,6 +7,8 @@ import { AllExceptionsFilter } from './utils/allException.filter';
 
 
 async function bootstrap() {
+  console.log(process.env.NODE_ENV)
+  console.log(process.env.MONGODB_URI)
   const app = await NestFactory.create(AppModule);
   app.useWebSocketAdapter(new IoAdapter(app)); // socket.io 어댑터 사용 설정
   app.useGlobalFilters(new AllExceptionsFilter());
@@ -26,6 +28,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  await app.listen(3000);
+  // @ts-ignore
+  await app.listen(process.env.PORT);
 }
 bootstrap();

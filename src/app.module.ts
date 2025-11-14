@@ -7,7 +7,9 @@ import { WebSocketModule } from './socket/webSocket.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      envFilePath: `.env.${process.env.NODE_ENV}`,
+      isGlobal: true }),
     // @ts-ignore
     MongooseModule.forRoot(process.env.MONGODB_URI),
     RobotModule,
