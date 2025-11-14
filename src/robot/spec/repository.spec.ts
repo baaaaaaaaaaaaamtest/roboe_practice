@@ -1,13 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MongooseModule, getConnectionToken } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
-import { NotFoundException, InternalServerErrorException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import { RobotRepository } from '../robot.repository';
 import { Robot, RobotSchema } from '../schemas/robot.schema';
 import { CreateRobotDto } from '../dto/createRobot.dto';
 import { UpdateRobotStatusDto } from '../dto/updateRobotStatus.dto';
-import * as dotenv from 'dotenv';
-dotenv.config();
+import { RobotLog, RobotLogSchema } from '../../socket/schemas/robotLog.schema';
+import { ConfigModule } from '@nestjs/config';
+
 
 const cDto:CreateRobotDto = {
   "_id": "RBT-00",
@@ -31,9 +32,17 @@ describe('RobotRepository (e2e)', () => {
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
+
+        ConfigModule.forRoot({
+          envFilePath: `.env.dev`,
+          isGlobal: true }),
         // @ts-ignore
         MongooseModule.forRoot(process.env.MONGODB_URI),
-        MongooseModule.forFeature([{ name: Robot.name, schema: RobotSchema }]),
+        MongooseModule.forFeature([
+          { name: Robot.name, schema: RobotSchema },
+          { name: RobotLog.name, schema: RobotLogSchema },
+          ]
+        ),
       ],
       providers: [RobotRepository],
     }).compile();

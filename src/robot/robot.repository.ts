@@ -8,10 +8,14 @@ import { Model,Types } from 'mongoose';
 import { Robot, RobotDocument } from './schemas/robot.schema';
 import {CreateRobotDto} from "./dto/createRobot.dto";
 import { UpdateRobotStatusDto } from './dto/updateRobotStatus.dto';
+import { RobotLog, RobotLogDocument } from '../socket/schemas/robotLog.schema';
 
 @Injectable()
 export class RobotRepository {
-  constructor(@InjectModel(Robot.name) private readonly robotModel: Model<RobotDocument>) {}
+  constructor(
+    @InjectModel(Robot.name) private readonly robotModel: Model<RobotDocument>,
+    @InjectModel(RobotLog.name) private readonly robotLogModel: Model<RobotLogDocument>
+  ) {}
 
   async findAll(): Promise<Robot[]> {
     return await this.robotModel.find().exec();
@@ -22,6 +26,14 @@ export class RobotRepository {
     const result = await this.robotModel.findOne({ _id: id }).exec();
     if (!result) {
       throw new NotFoundException(`Robot with id ${id} not found`);
+    }
+    return result;
+  }
+
+  async findLogById(id: string): Promise<RobotLog[] | null> {
+    const result = await this.robotLogModel.find({ robotId: id }).exec();
+    if (!result) {
+      throw new NotFoundException(`RobotLog with id ${id} not found`);
     }
     return result;
   }

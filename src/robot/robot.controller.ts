@@ -30,6 +30,14 @@ export class RobotController {
     return await this.service.findById(id)
   }
 
+  @Get(':id/logs')
+  @ApiOperation({ summary: '특정 로봇 로그 조회' })
+  @ApiParam({ name: 'id', description: '로봇 고유 ID' })
+  @ApiResponse({ status: 200, description: '로봇 데이터 반환' })
+  async getRobotLogOne(@Param('id') id: string) {
+    return await this.service.findLogById(id)
+  }
+
   @Post()
   @ApiOperation({ summary: '로봇 생성' })
   @ApiBody({ type: CreateRobotDto })

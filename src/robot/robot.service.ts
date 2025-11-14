@@ -16,6 +16,10 @@ export class RobotService {
     return await this.repository.findById(id)
   }
 
+  async findLogById(id:string){
+    return await this.repository.findLogById(id)
+  }
+
   async createRobot(createRobotDto: CreateRobotDto){
     return await this.repository.createRobot(createRobotDto);
   }
